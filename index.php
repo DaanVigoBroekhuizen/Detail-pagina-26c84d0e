@@ -6,6 +6,7 @@
     <tr>
         <th>titel</th>
         <th>rating</th>
+        <th>detail</th>
     </tr>
 <?php
  $host = '127.0.0.1';
@@ -32,6 +33,7 @@
     <tr>
         <td><?= $row['title']?></td>
         <td><?= $row['rating']?></td>
+        <td><a href="series.php?id=<?= $row['id'] ?>">bekijk hier de details</a></td>
     </tr>
         <?php
  }
@@ -52,6 +54,7 @@ while ($row = $stmt->fetch()) {
     <tr>
         <td><?= $row['title']?></td>
         <td><?= $row['duur']?></td>
+        <td><a href="films.php?id=<?= $row['id'] ?>">bekijk hier de details</a></td>
     </tr>
      <?php
 }

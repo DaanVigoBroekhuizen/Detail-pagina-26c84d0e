@@ -16,34 +16,25 @@
  } catch (\PDOException $e) {
       throw new \PDOException($e->getMessage(), (int)$e->getCode());
  }
-
- $stmt = $pdo->query('SELECT * FROM series');
+ $getal = $_GET["id"];
+ $stmt = $pdo->prepare('SELECT * FROM movies WHERE id = :id');
+ $stmt->execute(array(':id' => $getal));
  while ($row = $stmt->fetch()) {
         ?>
+       <table>
+            <a href="index.php">terug</a>
+            <tr><th>datum van uitkomst</th> <td><?= $row['datum_van_uitkomst']?></td> </tr>
+            <tr><th>land van afkomst</th> <td><?= $row['land_van_uitkomst']?></td> </tr>
     <tr>
-        <td><?= $row['title']?></td>
-        <td><?= $row['rating']?></td>
+        <h1><?= $row['title']?> - <?= $row['duur']?></h1>
     </tr>
+    <p><?= $row['description']?></p>
         <?php
  }
     ?>
-
-<table>
-    <h2>films</h2>
-    <tr>
-        <th>titel</th>
-        <th>duur</th>
-    </tr>
-
-<?php
-    $stmt = $pdo->query('SELECT * FROM movies');
-while ($row = $stmt->fetch()) {
-    ?>
-    <tr>
-        <td><?= $row['title']?></td>
-        <td><?= $row['duur']?></td>
-    </tr>
-     <?php
-}
-?>
 </table>
+<div> 
+<iframe width="420" height="315"
+src="https://www.youtube.com/embed/<?= $row['youtube_trailer_id'] ?>">
+</iframe> 
+</div>
